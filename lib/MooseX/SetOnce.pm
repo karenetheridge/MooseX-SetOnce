@@ -54,5 +54,12 @@ If the attribute has a clearer, you may clear the attribute and set it again.
 
 =cut
 
+=head1 LIMITATIONS
+
+Temporarily, this attribute trait is not available from roles. (The
+'applied_atttribute' option is not yet implemented in
+Moose::Util::MetaRole::apply_metaroles.)
+
+=cut
 
 1;
