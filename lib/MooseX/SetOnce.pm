@@ -56,9 +56,9 @@ If the attribute has a clearer, you may clear the attribute and set it again.
 
 =head1 LIMITATIONS
 
-Temporarily, this attribute trait is not available from roles. (The
-'applied_atttribute' option is not yet implemented in
-Moose::Util::MetaRole::apply_metaroles.)
+Temporarily, this attribute trait is not available from roles, unless the
+composing class also does C<use MooseX::SetOnce;>. (The 'applied_atttribute'
+option is not yet implemented in Moose::Util::MetaRole::apply_metaroles.)
 
 =cut
 
