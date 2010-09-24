@@ -3,9 +3,20 @@ use warnings;
 package MooseX::SetOnce;
 # ABSTRACT: write-once, read-many attributes for Moose
 
-# XXX TODO: here is where we would call Moose::Exporter
-use MooseX::SetOnce::Attribute;
-use MooseX::SetOnce::Accessor;
+use Moose ();
+use Moose::Exporter;
+
+Moose::Exporter->setup_import_methods(
+    $Moose::VERSION >= 0.9301 ?
+    (
+        class_metaroles => {
+            attribute   => ['MooseX::SetOnce::Attribute'],
+        }
+    ) :
+    (
+        attribute_metaclass_roles => ['MooseX::SetOnce::Attribute'],
+    ),
+);
 
 =head1 SYNOPSIS
 
