@@ -5,11 +5,11 @@ use Test::More tests => 12;
 use Try::Tiny;
 
 use lib 'lib';
-require MooseX::SetOnce;
 
 {
     package Apple;
     use Moose;
+    use MooseX::SetOnce;
 
     has color => (
         is     => 'rw',
@@ -20,6 +20,7 @@ require MooseX::SetOnce;
 {
     package Orange;
     use Moose;
+    use MooseX::SetOnce;
 
     has color => (
         reader => 'get_color',
