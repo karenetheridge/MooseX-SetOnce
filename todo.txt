@@ -1,0 +1,14 @@
+In a separate file so rjbs can ignore/delete if he wishes. But if this were my
+module, this is what I would do next. Or he can punt back to me and I'll do it :)
+
+- alter names of new packages:
+  MooseX::SetOnce::Attribute -> MooseX::SetOnce::Meta::Trait::Attribute
+  MooseX::SetOnce::Accessor  -> MooseX::SetOnce::Meta::Trait::Accessor
+- add Test::NoWarnings to unit tests
+- switch Try::Tiny try{} to Test::Exception lives_ok {}
+- convert to using Module::Install (this is probably already done, but is just
+  not in the repository - missing Makefile.PL, MANIFEST, META.yml, MANIFEST.SKIP etc)
+- remove use lib 'lib'; from unit tests ('make test' takes care of this)
+- add author tests - pod, eol, notabs etc
+- more detailed docs?
+

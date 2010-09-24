@@ -11,7 +11,10 @@ Moose::Exporter->setup_import_methods(
     (
         class_metaroles => {
             attribute   => ['MooseX::SetOnce::Attribute'],
-        }
+        },
+        role_metaroles => {
+            applied_attribute => ['MooseX::SetOnce::Attribute'],
+        },
     ) :
     (
         attribute_metaclass_roles => ['MooseX::SetOnce::Attribute'],
