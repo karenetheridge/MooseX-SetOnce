@@ -3,6 +3,10 @@ use warnings;
 package MooseX::SetOnce;
 # ABSTRACT: write-once, read-many attributes for Moose
 
+# XXX TODO: here is where we would call Moose::Exporter
+use MooseX::SetOnce::Attribute;
+use MooseX::SetOnce::Accessor;
+
 =head1 SYNOPSIS
 
 Add the "SetOnce" trait to attributes:
@@ -36,44 +40,5 @@ If the attribute has a clearer, you may clear the attribute and set it again.
 
 =cut
 
-package MooseX::SetOnce::Attribute;
-use Moose::Role 0.90;
-
-before set_value => sub { $_[0]->_ensure_unset($_[1]) };
-
-sub _ensure_unset {
-  my ($self, $instance) = @_;
-  Carp::confess("cannot change value of SetOnce attribute")
-    if $self->has_value($instance);
-}
-
-around accessor_metaclass => sub {
-  my ($orig, $self, @rest) = @_;
-
-  return Moose::Meta::Class->create_anon_class(
-    superclasses => [ $self->$orig(@_) ],
-    roles => [ 'MooseX::SetOnce::Accessor' ],
-    cache => 1
-  )->name
-};
-
-package MooseX::SetOnce::Accessor;
-use Moose::Role 0.90;
-
-around _inline_store => sub {
-  my ($orig, $self, $instance, $value) = @_;
-
-  my $code = $self->$orig($instance, $value);
-  $code = sprintf qq[%s->meta->get_attribute("%s")->_ensure_unset(%s);\n%s],
-    $instance,
-    quotemeta($self->associated_attribute->name),
-    $instance,
-    $code;
-
-  return $code;
-};
-
-package Moose::Meta::Attribute::Custom::Trait::SetOnce;
-sub register_implementation { 'MooseX::SetOnce::Attribute' }
 
 1;
