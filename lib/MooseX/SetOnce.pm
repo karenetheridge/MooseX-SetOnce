@@ -40,7 +40,7 @@ Add the "SetOnce" trait to attributes:
 
 =head1 DESCRIPTION
 
-The 'SetOnce' attribute lets your class have attributes that are not lazy and
+The 'SetOnce' attribute trait lets your class have attributes that are not lazy and
 not set, but that cannot be altered once set.
 
 The logic is very simple:  if you try to alter the value of an attribute with
